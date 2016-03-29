@@ -1,3 +1,3 @@
-class Slot < ActiveRecord::Base
+class Document < ActiveRecord::Base
   validates :title, presence: true
 end
