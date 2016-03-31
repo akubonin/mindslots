@@ -11,13 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160329200613) do
+ActiveRecord::Schema.define(version: 20160331140527) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "slot_id"
   end
+
+  add_index "comments", ["slot_id"], name: "index_comments_on_slot_id"
 
   create_table "documents", force: :cascade do |t|
     t.string   "title"
@@ -25,9 +28,32 @@ ActiveRecord::Schema.define(version: 20160329200613) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "folders", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id"
+
   create_table "slots", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "document_id"
+  end
+
+  add_index "slots", ["document_id"], name: "index_slots_on_document_id"
+
+  create_table "users", force: :cascade do |t|
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

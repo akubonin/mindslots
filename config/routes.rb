@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :profiles
+  resources :users
+  resources :folders
   resources :comments
   resources :slots
   resources :documents
